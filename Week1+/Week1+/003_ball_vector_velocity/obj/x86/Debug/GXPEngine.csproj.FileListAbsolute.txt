@@ -1,0 +1,8 @@
+C:\Users\admin\Downloads\Week1+\Week1+\003_ball_vector_velocity\bin\Debug\GXPEngine.exe.config
+C:\Users\admin\Downloads\Week1+\Week1+\003_ball_vector_velocity\bin\Debug\GXPEngine.exe
+C:\Users\admin\Downloads\Week1+\Week1+\003_ball_vector_velocity\bin\Debug\GXPEngine.pdb
+C:\Users\admin\Downloads\Week1+\Week1+\003_ball_vector_velocity\obj\x86\Debug\GXPEngine.csproj.AssemblyReference.cache
+C:\Users\admin\Downloads\Week1+\Week1+\003_ball_vector_velocity\obj\x86\Debug\GXPEngine.csproj.SuggestedBindingRedirects.cache
+C:\Users\admin\Downloads\Week1+\Week1+\003_ball_vector_velocity\obj\x86\Debug\GXPEngine.csproj.CoreCompileInputs.cache
+C:\Users\admin\Downloads\Week1+\Week1+\003_ball_vector_velocity\obj\x86\Debug\GXPEngine.exe
+C:\Users\admin\Downloads\Week1+\Week1+\003_ball_vector_velocity\obj\x86\Debug\GXPEngine.pdb
