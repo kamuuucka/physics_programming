@@ -4,6 +4,9 @@ using System.Drawing;
 
 public class MyGame : Game
 {	
+	/// <summary>
+	/// Method used to test all the functionalities of Vec2 struct
+	/// </summary>
 	static void DoTest()
     {
 		Vec2 v = new Vec2(-8, 6);
@@ -34,28 +37,49 @@ public class MyGame : Game
 		
 	}
 
-	Ball _ball;
+	private Ball ball;
 
-	EasyDraw _text;
+	private EasyDraw velocityCounter;
+	private EasyDraw gameOverText;
+	private EasyDraw timerText;
 
 	public MyGame () : base(800, 600, false,false)
 	{
-		_ball = new Ball (30, new Vec2 (width / 2, height / 2));
-		AddChild (_ball);
+		ball = new Ball (30, new Vec2 (width / 2, height / 2));
+		AddChild (ball);
 
-		_text = new EasyDraw (200,25);
-		_text.TextAlign (CenterMode.Min, CenterMode.Min);
-		AddChild (_text);
+		velocityCounter = new EasyDraw (200,25);
+		velocityCounter.TextAlign (CenterMode.Min, CenterMode.Min);
+		AddChild (velocityCounter);
 
+		gameOverText = new EasyDraw(400, 50);
+		gameOverText.TextAlign(CenterMode.Min, CenterMode.Min);
+		AddChild(gameOverText);
 
-        
-    }
+		timerText = new EasyDraw(400, 50);
+		timerText.TextAlign (CenterMode.Min,CenterMode.Min);
+		timerText.SetXY(width - 200, 0);
+		AddChild (timerText);
+
+	}
 
 	void Update () {
-		_ball.Step ();
+		ball.Step ();
 
-		_text.Clear (Color.Transparent);
-		_text.Text("Velocity: "+_ball.velocity, 0, 0);
+		velocityCounter.Clear (Color.Transparent);
+		velocityCounter.Text("Velocity: "+ball.velocity, 0, 0);
+
+		timerText.Clear(Color.Transparent);
+		timerText.Text("TIME: " + (int)ball.timer);
+
+		if (ball.GameOver())
+        {
+			ball.Destroy();
+			velocityCounter.Destroy();
+			gameOverText.Text("GAME OVER");
+			gameOverText.SetXY(width / 2-100, height / 2);
+			timerText.SetXY(width / 2-100, height / 2 + 30);
+        }
 	}
 }
 

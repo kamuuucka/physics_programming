@@ -19,16 +19,23 @@ public struct Vec2
 	}
 
 	public Vec2 Normalized()
-    {		
-		return new Vec2(x / Length(), y / Length());
+    {	
+		if (Length() != 0)
+		{
+			return new Vec2(x / Length(), y / Length());
+		}
+		else return this;
+		
 	}
 
 	public void Normalize()
     {
 		float l = Length();
-		y = y / l;
-		x = x / l;
-		
+		if (l != 0)
+        {
+			y = y / l;
+			x = x / l;
+		}
 	}
 
 	public void SetXY(float x, float y)
@@ -36,8 +43,6 @@ public struct Vec2
 		this.x = x;
 		this.y = y;
     }
-
-	// TODO: Implement subtract, scale operators
 
 	public static Vec2 operator+ (Vec2 left, Vec2 right) {
 		return new Vec2(left.x+right.x, left.y+right.y);
