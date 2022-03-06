@@ -12,6 +12,7 @@ public class Ball : EasyDraw
     }
 
     public Vec2 velocity;
+    private Vec2 pVelocity;
 
     int _radius;
     Vec2 _position;
@@ -73,9 +74,32 @@ public class Ball : EasyDraw
 
     void Movement()
     {
+        
         velocity.x = 0;
         velocity.y = 0;
 
+        
+
+        velocity = pVelocity * 0.99f;
+        //Console.WriteLine(pVelocity);
+        velocity += FollowMouse() * 0.01f;
+        //Console.WriteLine(FollowMouse());
+        //Console.WriteLine(velocity.Length().ToString());
+
+        ///QUESTIONS
+        ///I don't know the answer to first two
+        ///1.
+        ///2.
+        ///3. The ball is escaping the cursor instead of following it
+
+        //Every frame make the speed bigger
+        _speed += 0.01f;
+        GameOver();
+    }
+
+    private Vec2 FollowMouse()
+    {
+        Vec2 _velocity;
         //Count the distance between mouse and ball
         mouse = new Vec2(Input.mouseX, Input.mouseY);
         _delta = mouse - _position;
@@ -83,17 +107,16 @@ public class Ball : EasyDraw
         //Normalize delta vector (distance) to get the value 1 but keep pointing in the direction of the target
         //Multiply the delta vector with speed so lenght is equal to speed
         //Assign it to velocity, so ball will move with desired speed
-        velocity = _delta.Normalized() * _speed;
+        _velocity = _delta.Normalized() * _speed;
 
         //If length of velocity is bigger than speed, fix it. Used to fix the diagonal movement
-        if (velocity.Length() > _speed)
+        if (_velocity.Length() > _speed)
         {
-            velocity = velocity.Normalized() * _speed;
+            _velocity = _velocity.Normalized() * _speed;
         }
 
-        //Every frame make the speed bigger
-        _speed += 0.05f;
-        GameOver();
+        pVelocity = _velocity;
+        return _velocity;
     }
 
     public bool GameOver()
