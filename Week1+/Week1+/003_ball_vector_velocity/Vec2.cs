@@ -20,9 +20,10 @@ public struct Vec2
 
 	public Vec2 Normalized()
     {	
-		if (Length() != 0)
+		float l = Length();
+		if (l != 0)
 		{
-			return new Vec2(x / Length(), y / Length());
+			return new Vec2(x / l, y / l);
 		}
 		else return this;
 		
