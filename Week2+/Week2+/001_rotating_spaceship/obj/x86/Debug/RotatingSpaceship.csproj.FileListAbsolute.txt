@@ -1,0 +1,8 @@
+E:\studia\y1\physics_programming\Week2+\Week2+\001_rotating_spaceship\bin\Debug\RotatingSpaceship.exe.config
+E:\studia\y1\physics_programming\Week2+\Week2+\001_rotating_spaceship\bin\Debug\RotatingSpaceship.exe
+E:\studia\y1\physics_programming\Week2+\Week2+\001_rotating_spaceship\bin\Debug\RotatingSpaceship.pdb
+E:\studia\y1\physics_programming\Week2+\Week2+\001_rotating_spaceship\obj\x86\Debug\RotatingSpaceship.csproj.AssemblyReference.cache
+E:\studia\y1\physics_programming\Week2+\Week2+\001_rotating_spaceship\obj\x86\Debug\RotatingSpaceship.csproj.SuggestedBindingRedirects.cache
+E:\studia\y1\physics_programming\Week2+\Week2+\001_rotating_spaceship\obj\x86\Debug\RotatingSpaceship.csproj.CoreCompileInputs.cache
+E:\studia\y1\physics_programming\Week2+\Week2+\001_rotating_spaceship\obj\x86\Debug\RotatingSpaceship.exe
+E:\studia\y1\physics_programming\Week2+\Week2+\001_rotating_spaceship\obj\x86\Debug\RotatingSpaceship.pdb
