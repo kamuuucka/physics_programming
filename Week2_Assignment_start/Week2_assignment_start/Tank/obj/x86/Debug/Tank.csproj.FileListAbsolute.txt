@@ -6,3 +6,11 @@ E:\studia\y1\physics_programming\Week2_Assignment_start\Week2_assignment_start\T
 E:\studia\y1\physics_programming\Week2_Assignment_start\Week2_assignment_start\Tank\obj\x86\Debug\Tank.csproj.CoreCompileInputs.cache
 E:\studia\y1\physics_programming\Week2_Assignment_start\Week2_assignment_start\Tank\obj\x86\Debug\Tank.exe
 E:\studia\y1\physics_programming\Week2_Assignment_start\Week2_assignment_start\Tank\obj\x86\Debug\Tank.pdb
+E:\physics_programming\Week2_Assignment_start\Week2_assignment_start\Tank\bin\Debug\Tank.exe.config
+E:\physics_programming\Week2_Assignment_start\Week2_assignment_start\Tank\bin\Debug\Tank.exe
+E:\physics_programming\Week2_Assignment_start\Week2_assignment_start\Tank\bin\Debug\Tank.pdb
+E:\physics_programming\Week2_Assignment_start\Week2_assignment_start\Tank\obj\x86\Debug\Tank.csproj.AssemblyReference.cache
+E:\physics_programming\Week2_Assignment_start\Week2_assignment_start\Tank\obj\x86\Debug\Tank.csproj.SuggestedBindingRedirects.cache
+E:\physics_programming\Week2_Assignment_start\Week2_assignment_start\Tank\obj\x86\Debug\Tank.csproj.CoreCompileInputs.cache
+E:\physics_programming\Week2_Assignment_start\Week2_assignment_start\Tank\obj\x86\Debug\Tank.exe
+E:\physics_programming\Week2_Assignment_start\Week2_assignment_start\Tank\obj\x86\Debug\Tank.pdb

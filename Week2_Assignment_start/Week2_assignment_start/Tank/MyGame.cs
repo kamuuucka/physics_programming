@@ -6,6 +6,15 @@ public class MyGame : Game
 {
     static void DoTest()
     {
+
+        float n = 0;
+        for (int i=0;i<10;i++)
+        {
+            n += 0.1f;
+        }
+        Console.WriteLine("Test: 1=1? {0}",(n==1));
+
+
         Console.WriteLine("Convertion (deg to rad) ok? {0} It shoul be 0,349", Vec2.Deg2Rad(20));
         Console.WriteLine("Conversion (rad to deg) ok? {0} It should be 1145,915", Vec2.Rad2Deg(20));
         Console.WriteLine("New vector pointing in the direction (deg) ok? {0} Should be (0,939692 , 0,342020)", Vec2.GetUnitVectorDeg(20));
@@ -14,12 +23,15 @@ public class MyGame : Game
 
         Vec2 v1 = new Vec2(3, 4);
         Vec2 v2 = new Vec2(3, 4);
-        v1.SetAngleDegrees(20);
+        v1.SetAngleDegrees(200);
         Console.WriteLine("Setting angle in degrees. Length stays the same. Ok? {0}", v1);
         v2.SetAngleRadians(20);
         Console.WriteLine("Setting angle in radians. Length stays the same. Ok? {0}", v2);
-        Console.WriteLine("Angle in degrees ok? {0} Should be 20", v1.GetAngleDegrees());
+        Console.WriteLine("Angle in degrees ok? {0} Should be 200", v1.GetAngleDegrees());
         Console.WriteLine("Angle in radians ok? {0} Should be 20", v2.GetAngleRadians());
+        float rad = 20;
+        while (rad > Mathf.PI) rad -= 2 * Mathf.PI;
+        Console.WriteLine("...or {0}, which is also okay",rad);
 
         Vec2 v3 = new Vec2(4, 5);
         Vec2 v4 = new Vec2(4, 5);

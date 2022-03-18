@@ -98,7 +98,7 @@ public class Ball : EasyDraw
 
         //Every frame make the speed bigger
         _speed += 0.01f;
-        GameOver();
+        //GameOver();
     }
 
     private Vec2 GetVelocityToMouse()
