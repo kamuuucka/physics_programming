@@ -104,12 +104,21 @@ public class Block : EasyDraw
 	// This method is just an example of how to check boundaries, and change color.
 	void CheckBoundaryCollisions() {
 		MyGame myGame = (MyGame)game;
-		Vec2 newVelocity = velocity;
+		float impactY;
+		float impactX;
+		Vec2 t = new Vec2(1,1);
+		float time;
+		float poiY;
+
 		if (_position.x - radius < myGame.LeftXBoundary) {
 			// move block from left to right boundary:
 			//_position.x += myGame.RightXBoundary - myGame.LeftXBoundary - 2 * radius;
+			//impactX = myGame.LeftXBoundary + radius;
+			//t.x = (_oldPosition.x - impactX) / _oldPosition.x - _position.x;
+			
 			_position.x -= velocity.x;					//velocity.x is negative so to "add" it we need to substract it
 			velocity.x = -bounciness * velocity.x;
+			//_position.x = _oldPosition.x + t.x * velocity.x;
 			SetFadeColor(1, 0.2f, 0.2f);
 			if (wordy) {
 				Console.WriteLine ("Left boundary collision");
@@ -117,6 +126,8 @@ public class Block : EasyDraw
 		} else if (_position.x + radius > myGame.RightXBoundary) {
 			// move block from right to left boundary:
 			//_position.x -= myGame.RightXBoundary - myGame.LeftXBoundary - 2 * radius;
+			//impactX = myGame.RightXBoundary - radius;
+			//t.x = (impactX - _oldPosition.x) / _position.x - _oldPosition.x;
 			_position.x -= velocity.x;
 			velocity.x = -bounciness * velocity.x;
 			SetFadeColor(1, 0.2f, 0.2f);
@@ -127,6 +138,8 @@ public class Block : EasyDraw
 		if (_position.y - radius < myGame.TopYBoundary) {
 			// move block from top to bottom boundary:
 			//_position.y += myGame.BottomYBoundary - myGame.TopYBoundary - 2 * radius;
+			//impactY = myGame.BottomYBoundary - radius;
+			//t.y = (impactY - _oldPosition.y) / _position.y - _oldPosition.y;
 			_position.y -= velocity.y;					//velocity.y is negative so to "add" it we need to substract it
 			velocity.y = -bounciness * velocity.y;
 			SetFadeColor(0.2f, 1, 0.2f);
@@ -136,9 +149,17 @@ public class Block : EasyDraw
 		} else if (_position.y + radius > myGame.BottomYBoundary) {
 			// move block from bottom to top boundary:
 			//_position.y -= myGame.BottomYBoundary - myGame.TopYBoundary - 2 * radius;
+			impactY = myGame.BottomYBoundary - radius;
+			t.y = (impactY - _oldPosition.y) / _position.y - _oldPosition.y;
+
+
 			_position.y -= velocity.y;
 			//newVelocity.y = -velocity.y;
+			//poiY = _oldPosition.y + t.y * velocity.y;
+			//_position.y = poiY;
 			velocity.y = -bounciness * velocity.y;
+			
+			//_position.y = _oldPosition.y + t.y * velocity.y;
 			SetFadeColor(0.2f, 1, 0.2f);
 			if (wordy) {
 				Console.WriteLine ("Bottom boundary collision");
@@ -146,6 +167,8 @@ public class Block : EasyDraw
 		}
 
 		velocity += acceleration;
+		//_position = _oldPosition + new Vec2(t.x * velocity.x, t.y * velocity.y);
+		
 	}
 
 	// This method is just an example of how to get information about other blocks in the scene.
