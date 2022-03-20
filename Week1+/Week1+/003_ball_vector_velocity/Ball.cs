@@ -78,11 +78,15 @@ public class Ball : EasyDraw
         velocity.x = 0;
         velocity.y = 0;
 
-        
+        // here we do the linear interpolation:
 
         velocity = pVelocity * 0.99f;
         //Console.WriteLine(pVelocity);
-        velocity += FollowMouse() * 0.01f;
+        velocity += GetVelocityToMouse() * 0.01f;
+
+        pVelocity = velocity; // just store it for next frame
+
+
         //Console.WriteLine(FollowMouse());
         //Console.WriteLine(velocity.Length().ToString());
 
@@ -94,10 +98,10 @@ public class Ball : EasyDraw
 
         //Every frame make the speed bigger
         _speed += 0.01f;
-        GameOver();
+        //GameOver();
     }
 
-    private Vec2 FollowMouse()
+    private Vec2 GetVelocityToMouse()
     {
         Vec2 _velocity;
         //Count the distance between mouse and ball
@@ -109,13 +113,13 @@ public class Ball : EasyDraw
         //Assign it to velocity, so ball will move with desired speed
         _velocity = _delta.Normalized() * _speed;
 
-        //If length of velocity is bigger than speed, fix it. Used to fix the diagonal movement
-        if (_velocity.Length() > _speed)
-        {
-            _velocity = _velocity.Normalized() * _speed;
-        }
+        ////If length of velocity is bigger than speed, fix it. Used to fix the diagonal movement
+        //if (_velocity.Length() > _speed)
+        //{
+        //    _velocity = _velocity.Normalized() * _speed;
+        //}
 
-        pVelocity = _velocity;
+        //pVelocity = _velocity;
         return _velocity;
     }
 
@@ -152,13 +156,15 @@ public class Ball : EasyDraw
 
     public void Step()
     {
+        Movement();
+        Timer();
+
         //KeyControls ();
 
         _position += velocity;
 
 
         UpdateScreenPosition();
-        Movement();
-        Timer();
+
     }
 }

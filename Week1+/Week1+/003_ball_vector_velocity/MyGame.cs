@@ -72,14 +72,14 @@ public class MyGame : Game
 		timerText.Clear(Color.Transparent);
 		timerText.Text("TIME: " + (int)ball.timer);
 
-		if (ball.GameOver())
-        {
-			ball.Destroy();
-			velocityCounter.Destroy();
-			gameOverText.Text("GAME OVER");
-			gameOverText.SetXY(width / 2-100, height / 2);
-			timerText.SetXY(width / 2-100, height / 2 + 30);
-        }
+		//if (ball.GameOver())
+  //      {
+		//	ball.Destroy();
+		//	velocityCounter.Destroy();
+		//	gameOverText.Text("GAME OVER");
+		//	gameOverText.SetXY(width / 2-100, height / 2);
+		//	timerText.SetXY(width / 2-100, height / 2 + 30);
+  //      }
 	}
 }
 
