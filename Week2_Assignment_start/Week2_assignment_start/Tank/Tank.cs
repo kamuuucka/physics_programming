@@ -20,14 +20,13 @@ class Tank : Sprite
 	float speed;
 	float speed_max = 5f;
 	Vec2 direction = new Vec2(0, 0);
-	float angle;
 
 	public Tank(float px, float py) : base("assets/bodies/t34.png") 
 	{
 		_position.x = px;
 		_position.y = py;
-		barrel = new Barrel();
 		SetOrigin(width/2, height/2);
+		barrel = new Barrel(px, py);
 		AddChild (barrel);
 	}
 
@@ -75,13 +74,12 @@ class Tank : Sprite
 		direction = Vec2.GetUnitVectorDeg(rotation);
 		velocity = direction * speed;
 
-		Console.WriteLine (speed);
 	}
 
 	void Shoot() {
 		if (Input.GetKeyDown (Key.SPACE)) 
 		{
-			AddChild (new Bullet (new Vec2 (0, 0), new Vec2 (1, 0)));
+			AddChild (new Bullet (barrel.direction*20, barrel.direction));
 		}
 	}
 

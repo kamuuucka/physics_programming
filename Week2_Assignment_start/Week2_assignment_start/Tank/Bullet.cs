@@ -19,6 +19,7 @@ class Bullet : Sprite
 	{
 		_position = pPosition;
 		velocity = pVelocity;
+		rotation = pVelocity.GetAngleDegrees();
 	}
 
 	void UpdateScreenPosition() 

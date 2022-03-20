@@ -114,7 +114,6 @@ public struct Vec2
 		Console.WriteLine("SetAngle length: " + Length());
     }
 
-	//Something is not working here idk why
 	public float GetAngleRadians()
     {
 		return Mathf.Atan2(y, x);

@@ -1,0 +1,8 @@
+E:\studia\y1\physics_programming\Week2+\Week2+\002_moving_and_aiming\bin\Debug\MovingAndAiming.exe.config
+E:\studia\y1\physics_programming\Week2+\Week2+\002_moving_and_aiming\bin\Debug\MovingAndAiming.exe
+E:\studia\y1\physics_programming\Week2+\Week2+\002_moving_and_aiming\bin\Debug\MovingAndAiming.pdb
+E:\studia\y1\physics_programming\Week2+\Week2+\002_moving_and_aiming\obj\x86\Debug\Moving_and_aiming.csproj.AssemblyReference.cache
+E:\studia\y1\physics_programming\Week2+\Week2+\002_moving_and_aiming\obj\x86\Debug\Moving_and_aiming.csproj.SuggestedBindingRedirects.cache
+E:\studia\y1\physics_programming\Week2+\Week2+\002_moving_and_aiming\obj\x86\Debug\Moving_and_aiming.csproj.CoreCompileInputs.cache
+E:\studia\y1\physics_programming\Week2+\Week2+\002_moving_and_aiming\obj\x86\Debug\MovingAndAiming.exe
+E:\studia\y1\physics_programming\Week2+\Week2+\002_moving_and_aiming\obj\x86\Debug\MovingAndAiming.pdb

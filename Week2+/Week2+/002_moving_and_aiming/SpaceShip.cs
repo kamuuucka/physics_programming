@@ -1,4 +1,5 @@
 ﻿using GXPEngine;
+using System;
 
 class SpaceShip : Sprite 
 {
@@ -37,11 +38,16 @@ class SpaceShip : Sprite
 		float dy = Input.mouseY - _position.y;
 
 		// Get angle to mouse, convert from radians to degrees:
-		float targetAngle = Mathf.Atan2(dy,dx) * 180 / Mathf.PI;
-
+		float targetAngle = Mathf.Atan2(dy, dx) * 180 / Mathf.PI;
+		Console.WriteLine("TARGET " + targetAngle);
+		Console.WriteLine(dx);
+		Console.WriteLine(dy);
+		Console.WriteLine(_position.x);
+		Console.WriteLine(_position.y);
 		if (!(Input.GetKey(Key.LEFT_SHIFT) || Input.GetKey(Key.RIGHT_SHIFT))) 
 		{ // Shift not pressed: Directly aim at mouse
 			rotation = targetAngle;
+			
 		} else 
 		{ // Shift pressed: Ease towards mouse position - but not in a good way! (Solve this for assignment 2)
 			if (targetAngle > rotation+0.5f) 

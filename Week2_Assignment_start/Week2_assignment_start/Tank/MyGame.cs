@@ -23,7 +23,7 @@ public class MyGame : Game
 
         Vec2 v1 = new Vec2(3, 4);
         Vec2 v2 = new Vec2(3, 4);
-        v1.SetAngleDegrees(200);
+        v1.SetAngleDegrees(180);
         Console.WriteLine("Setting angle in degrees. Length stays the same. Ok? {0}", v1);
         v2.SetAngleRadians(20);
         Console.WriteLine("Setting angle in radians. Length stays the same. Ok? {0}", v2);
