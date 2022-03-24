@@ -19,17 +19,20 @@ class Barrel : Sprite
 
 	public void Update() 
 	{
-		targetAngle = DeltaMouse().GetAngleDegrees();
+		targetAngle = DeltaMouse().GetAngleDegrees() - parent.rotation; //((Tank)parent).direction.GetAngleDegrees(); 
 		
 		rotation = targetAngle;
-		direction = Vec2.GetUnitVectorDeg(rotation);
+		direction = Vec2.GetUnitVectorDeg(rotation+parent.rotation); // direction of a barrel in the world
     }
 
 	private Vec2 DeltaMouse()
     {
 		Vec2 delta;
 		mouse = new Vec2(Input.mouseX, Input.mouseY);
-		delta = mouse - position;
+		delta = mouse - ((Tank)parent).position;  
+
+
+		
 		delta.Normalized();
         return delta;
 	}
