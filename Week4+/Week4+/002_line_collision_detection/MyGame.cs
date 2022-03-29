@@ -33,7 +33,10 @@ public class MyGame : Game
 		_ball.Step ();
 
 		//TODO: calculate correct distance from ball center to line
-		float ballDistance = 10000;   //HINT: it's NOT 10000
+		float ballDistance = 0;   //HINT: it's NOT 10000
+		Vec2 line = _ball.position - _lineSegment.start;
+
+		ballDistance = _ball.position.Dot(line.Normal()) + _ball.radius;
 
 		//compare distance with ball radius
 		if (ballDistance < _ball.radius) {

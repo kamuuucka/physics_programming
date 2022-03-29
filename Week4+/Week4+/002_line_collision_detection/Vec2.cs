@@ -150,8 +150,8 @@ public struct Vec2
 
 	public float Dot(Vec2 b)
 	{
-		Console.WriteLine(this.x * b.x + this.y * b.y);
-		return this.x * b.x + this.y * b.y;
+		Console.WriteLine(x * b.x + y * b.y);
+		return x * b.x + y * b.y;
 	}
 
 	public Vec2 Normal()
