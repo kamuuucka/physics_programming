@@ -153,4 +153,11 @@ public struct Vec2
 		Console.WriteLine(this.x * b.x + this.y * b.y);
 		return this.x * b.x + this.y * b.y;
     }
+
+	public Vec2 Normal()
+    {
+		Vec2 normal = new Vec2(-y, x);
+		normal.Normalize();
+		return normal;
+	}
 }
