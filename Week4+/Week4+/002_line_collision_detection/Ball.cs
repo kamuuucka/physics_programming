@@ -21,6 +21,9 @@ public class Ball : EasyDraw
 		position = pPosition;
 		_speed = pSpeed;
 
+		//velocity.x = _speed;
+		velocity.y = _speed;
+
 		UpdateScreenPosition ();
 		SetOrigin (_radius, _radius);
 
@@ -43,8 +46,8 @@ public class Ball : EasyDraw
 	}
 
 	public void Step () {
-		FollowMouse ();
-		//position += velocity;
+		//FollowMouse ();
+		position += velocity;
 
 		UpdateScreenPosition ();
 	}

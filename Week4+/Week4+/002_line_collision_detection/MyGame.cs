@@ -17,6 +17,13 @@ public class MyGame : Game
 
 	public MyGame () : base(800, 600, false,false)
 	{
+
+		//TEST Reflect()
+		Vec2 v = new Vec2(-3,4);
+		Vec2 n = new Vec2(6, 0);
+		v.Reflect(n.Normal());
+		Console.WriteLine(v.ToString());
+
 		_ball = new Ball (30, new Vec2 (width / 2, height / 2));
 		AddChild (_ball);
 
@@ -31,7 +38,6 @@ public class MyGame : Game
 	void Update () {
 		// For now: this just puts the ball at the mouse position:
 		_ball.Step ();
-
 		//TODO: calculate correct distance from ball center to line
 		float ballDistance = 0;   //HINT: it's NOT 10000
 
@@ -43,6 +49,7 @@ public class MyGame : Game
 		if (ballDistance < _ball.radius)
         {
 			_ball.position -= line.Normal() * (ballDistance - _ball.radius);
+			_ball.velocity.Reflect(line.Normal());
         }
 
 		//compare distance with ball radius

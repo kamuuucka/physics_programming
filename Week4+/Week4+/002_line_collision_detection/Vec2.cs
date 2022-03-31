@@ -160,4 +160,9 @@ public struct Vec2
 		normal.Normalize();
 		return normal;
 	}
+
+	public void Reflect(Vec2 pNormal, float pBounciness = 1)
+    {
+		this -= (1 + pBounciness) * Dot(pNormal) * pNormal;
+    }
 }
