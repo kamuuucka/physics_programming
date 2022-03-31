@@ -34,9 +34,16 @@ public class MyGame : Game
 
 		//TODO: calculate correct distance from ball center to line
 		float ballDistance = 0;   //HINT: it's NOT 10000
-		Vec2 line = _ball.position - _lineSegment.start;
 
-		ballDistance = _ball.position.Dot(line.Normal()) + _ball.radius;
+		Vec2 diffVector = _ball.position - _lineSegment.start;
+		Vec2 line = _lineSegment.end - _lineSegment.start;
+		ballDistance = diffVector.Dot(line.Normal());
+
+		//update ball position
+		if (ballDistance < _ball.radius)
+        {
+			_ball.position -= line.Normal() * (ballDistance - _ball.radius);
+        }
 
 		//compare distance with ball radius
 		if (ballDistance < _ball.radius) {
@@ -44,6 +51,8 @@ public class MyGame : Game
 		} else {
 			_ball.SetColor (0, 1, 0);
 		}
+
+		_ball.UpdateScreenPosition();
 
 		_text.Clear (Color.Transparent);
 		_text.Text("Distance to line: "+ballDistance, 0, 0);

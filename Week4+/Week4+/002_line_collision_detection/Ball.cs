@@ -37,7 +37,7 @@ public class Ball : EasyDraw
 		position.SetXY (Input.mouseX, Input.mouseY);
 	}
 
-	void UpdateScreenPosition() {
+	public void UpdateScreenPosition() {
 		x = position.x;
 		y = position.y;
 	}
