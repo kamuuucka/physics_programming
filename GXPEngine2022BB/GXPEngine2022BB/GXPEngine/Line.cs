@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using GXPEngine;
 
-internal class Line : GameObject
+public class Line : GameObject
 {
     private EasyDraw line;
 
@@ -24,7 +24,17 @@ internal class Line : GameObject
     {
         line.Line(start.x, start.y, end.x, end.y);
         line.SetColor(34, 234, 186);
-        Console.WriteLine("Line drawn {0}, {1}", start, end);
+        //Console.WriteLine("Line drawn {0}, {1}", start, end);
+    }
+
+    public float GetX()
+    {
+        return start.x;
+    }
+
+    public float GetY()
+    {
+        return start.y;
     }
 }
 

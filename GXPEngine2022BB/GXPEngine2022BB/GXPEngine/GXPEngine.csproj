@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Ball.cs" />
+    <Compile Include="CollisionInfo.cs" />
     <Compile Include="GXPEngine\AddOns\Gizmos.cs" />
     <Compile Include="GXPEngine\AddOns\SpriteBatch.cs" />
     <Compile Include="GXPEngine\AddOns\TiledLoader.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="GXPEngine\FMOD\FMODSoundSystem.cs" />
     <Compile Include="GXPEngine\SoLoud\Soloud.cs" />
     <Compile Include="GXPEngine\SoLoud\SoloudSoundSystem.cs" />
+    <Compile Include="Platform.cs" />
     <Compile Include="Vec2.cs" />
   </ItemGroup>
   <ItemGroup>

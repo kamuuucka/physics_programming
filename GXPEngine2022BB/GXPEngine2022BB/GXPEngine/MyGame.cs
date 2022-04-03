@@ -5,21 +5,34 @@ using System.Drawing;							// System.Drawing contains drawing tools such as Col
 public class MyGame : Game
 {
 	
-	float border = 60;
+	public float border = 60;
 
 	Ball ball;
-	Line leftXBoundary;
+	Platform platform;
+	public Line leftXBoundary;
+	public Line rightXBoundary;
+	public Line topYBoundary;
+	public Line diagonalLeftBoundary;
+	public Line diagonalRightBoundary;
 
 	public MyGame() : base(800, 600, false)		// Create a window that's 800x600 and NOT fullscreen
 	{
-		leftXBoundary = new Line(new Vec2(border, border), new Vec2(border, height - border));
+		leftXBoundary = new Line(new Vec2(border, border+100), new Vec2(border, height - border));
 		AddChild(leftXBoundary);
-		Line rightXBoundary = new Line(new Vec2(width-border, border), new Vec2(width-border, height-border));
+		rightXBoundary = new Line(new Vec2(width-border, border+100), new Vec2(width-border, height-border));
 		AddChild(rightXBoundary);
-		Line topYBoundary = new Line(new Vec2(border,border), new Vec2(width-border, border));
+		topYBoundary = new Line(new Vec2(border+100,border), new Vec2(width-border- 100, border));
 		AddChild(topYBoundary);
 
-		ball = new Ball(30, new Vec2(width/2, height/2));
+		diagonalLeftBoundary = new Line(new Vec2(border,border+100), new Vec2(border+100, border));
+		AddChild(diagonalLeftBoundary);
+		diagonalRightBoundary = new Line(new Vec2(width - border - 100, border), new Vec2(width - border, border + 100));
+		AddChild(diagonalRightBoundary);
+
+		platform = new Platform(200, 10, new Vec2 (width / 2, height - border*2));
+		AddChild(platform);
+
+		ball = new Ball(30, new Vec2(width/2, height/2), platform);
 		AddChild(ball);
 
 	}
@@ -28,24 +41,7 @@ public class MyGame : Game
 	void Update()
 	{
 		ball.Step();
-		float ballDistance = 0;   //HINT: it's NOT 10000
-
-		Vec2 diffVector = ball.position - leftXBoundary.start;
-		Vec2 line = leftXBoundary.start - leftXBoundary.end;
-		ballDistance = diffVector.Dot(line.Normal());
-
-		//update ball position
-		if (ballDistance < ball.radius)
-		{
-			ball.SetColor(1, 0, 0);
-			ball.position -= line.Normal() * (ballDistance - ball.radius);
-		}
-		else
-        {
-			ball.SetColor(0, 1, 0);
-        }
-
-		ball.UpdateScreenPosition();
+		platform.Step();
 	}
 
 	static void Main()							// Main() is the first method that's called when the program is run

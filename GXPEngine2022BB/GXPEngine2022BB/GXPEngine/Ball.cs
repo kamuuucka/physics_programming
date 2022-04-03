@@ -12,12 +12,22 @@ internal class Ball : EasyDraw
     float speed;
 
     public Vec2 position;
+    private Vec2 oldPosition;
+    private Vec2 velocity;
+    private CollisionInfo earliestCollision;
+    private Platform platform;
 
-    public Ball (int radius, Vec2 position, float speed = 5) : base (radius*2 + 1, radius * 2 + 1)
+    public static float bounciness = 0.98f;
+
+    public Ball (int radius, Vec2 position, Platform platform, float speed = 5) : base (radius*2 + 1, radius * 2 + 1)
     {
         this.radius = radius;
         this.position = position;   
         this.speed = speed;
+        this.platform = platform;
+
+        oldPosition = new Vec2(0,0);
+        velocity = new Vec2(-1,-0.8f);
 
         SetOrigin(radius, radius);
 
@@ -44,8 +54,133 @@ internal class Ball : EasyDraw
 
     public void Step()
     {
-        FollowMouse();
+        oldPosition = position;
+        //FollowMouse();
+        Move();
         UpdateScreenPosition();
+    }
+
+    private void Move()
+    {
+        earliestCollision = null;
+        //velocity += acceleration;
+        position += velocity;
+        PlatformCollision();
+        Collision();
+
+        if (earliestCollision != null)
+        {
+            ResolveCollision(earliestCollision);
+        }
+    }
+    void ResolveCollision(CollisionInfo collision)
+    {
+        position = oldPosition + collision.timeOfImpact * velocity;
+
+        if (collision.normal.x != 0)
+        {
+            velocity.x = -bounciness * velocity.x;
+        }
+
+        if (collision.normal.y != 0)
+        {
+            velocity.y = -bounciness * velocity.y;
+        }
+    }
+
+    private void PlatformCollision()
+    {
+        Console.WriteLine("Platform position: {0}     Ball position: {1}", platform.position.ToString(), position.ToString());
+        //  
+        if ((position.y + radius > platform.position.y - platform.height/2)
+            && (position.x > platform.position.x - platform.width / 2)
+            && (position.x < platform.position.x + platform.width /2))
+        {
+            SetColor(1, 0, 0);
+
+            Vec2 platformLine = (platform.position + new Vec2(platform.width, 0)) - platform.position;
+            Vec2 diffVectorPlatform = platform.position - position;
+
+
+            float platformDistance = diffVectorPlatform.Dot(platformLine.Normal());
+
+
+            position -= platformLine.Normal() * (platformDistance - radius);
+            velocity.Reflect(platformLine.Normal());
+        }
+    }
+
+    private void Collision()
+    {
+        MyGame myGame = (MyGame)game;
+        float impactY;
+        float impactX;
+        float time;
+
+        Vec2 diffVectorRight = myGame.diagonalRightBoundary.start - position;
+        Vec2 line = myGame.diagonalRightBoundary.start - myGame.diagonalRightBoundary.end;
+
+        Vec2 diffVectorLeft = position - myGame.diagonalLeftBoundary.start;
+        Vec2 lineLeft = myGame.diagonalLeftBoundary.end - myGame.diagonalLeftBoundary.start;
+
+        float ballDistance = diffVectorRight.Dot(line.Normal());
+        float ballDistanceLeft = diffVectorLeft.Dot(lineLeft.Normal());
+
+        //update ball position
+        if (ballDistance < radius)
+        {
+            SetColor(1, 1, 0);
+            position += line.Normal() * (ballDistance - radius);
+            velocity.Reflect(line.Normal());
+        }
+        else if (ballDistanceLeft < radius)
+        {
+            SetColor(1, 0, 1);
+            position += line.Normal() * (ballDistanceLeft + radius);
+            velocity.Reflect(line.Normal());
+        }
+
+        if (position.x - radius < myGame.leftXBoundary.GetX())
+        {
+            SetColor(1, 0, 0);
+
+            impactX = myGame.leftXBoundary.GetX() + radius;
+            time = (impactX - oldPosition.x) / (position.x - oldPosition.x);
+
+            if (earliestCollision == null || earliestCollision.timeOfImpact > time)
+            {
+                earliestCollision = new CollisionInfo(new Vec2(1, 0), null, time, velocity);
+            }
+        }
+        else if (position.x + radius > myGame.rightXBoundary.GetX())
+        {
+            SetColor(0, 1, 0);
+
+            impactX = myGame.rightXBoundary.GetX() - radius;
+            time = (impactX - oldPosition.x) / (position.x - oldPosition.x);
+
+            if (earliestCollision == null || earliestCollision.timeOfImpact > time)
+            {
+                earliestCollision = new CollisionInfo(new Vec2(-1, 0), null, time, velocity);
+            }            
+        }
+
+        if (position.y - radius < myGame.topYBoundary.GetY())
+        {
+            SetColor(0, 0, 1);
+
+            impactY = myGame.topYBoundary.GetY() + radius;
+            time = (impactY - oldPosition.y) / (position.y - oldPosition.y);
+
+            if (earliestCollision == null || earliestCollision.timeOfImpact > time)
+            {
+                earliestCollision = new CollisionInfo(new Vec2(0, 1), null, time, velocity);
+            }
+            
+        }
+        
+
+        
     }
 }
 
