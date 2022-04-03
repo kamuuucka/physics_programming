@@ -86,19 +86,40 @@ public class Block : EasyDraw
 
 	/******* THIS IS WHERE YOU SHOULD WORK: ***************************************************/
 
+	CollisionInfo earliestCollision;
+
 	void Move() {
+		earliestCollision = null;
 		// TODO: implement Assignment 3 here (and in methods called from here).
+		velocity += acceleration;
 		_position += velocity;
 
 		// Example methods (replace/extend):
 		CheckBoundaryCollisions();
-		CheckBlockOverlaps();
+		
+
+		//CheckBlockOverlaps();
 
 		// TIP: You can use the CollisionInfo class to pass information between methods, e.g.:
 		//
 		//CollisionInfo firstCollision=FindEarliestCollision();
-		//if (firstCollision!=null)
-		//	ResolveCollision(firstCollision);
+		if (earliestCollision!=null)
+			ResolveCollision(earliestCollision);
+	}
+
+	void ResolveCollision(CollisionInfo collision)
+	{
+		_position = _oldPosition + collision.timeOfImpact * velocity;
+
+		if (collision.normal.x != 0)
+        {
+			velocity.x = -bounciness * velocity.x;
+		}
+
+		if (collision.normal.y != 0)
+        {
+			velocity.y = -bounciness * velocity.y;
+		}
 	}
 
 	// This method is just an example of how to check boundaries, and change color.
@@ -106,18 +127,24 @@ public class Block : EasyDraw
 		MyGame myGame = (MyGame)game;
 		float impactY;
 		float impactX;
-		Vec2 t = new Vec2(1,1);
-		float time;
-		float poiY;
+		float time = 1;
+		Vec2 poi;
 
 		if (_position.x - radius < myGame.LeftXBoundary) {
 			// move block from left to right boundary:
 			//_position.x += myGame.RightXBoundary - myGame.LeftXBoundary - 2 * radius;
 			//impactX = myGame.LeftXBoundary + radius;
 			//t.x = (_oldPosition.x - impactX) / _oldPosition.x - _position.x;
+			//_position.x = myGame.LeftXBoundary + radius;
+			impactX = myGame.LeftXBoundary + radius;
+			time = (impactX - _oldPosition.x) / (_position.x - _oldPosition.x);
+
+			// Here we have a possible collision with TOI as calculated, with normal (1,0) and "other" = null. (boundaries don't count)
+			if (earliestCollision == null || earliestCollision.timeOfImpact > time)
+            {
+				earliestCollision = new CollisionInfo(new Vec2(1, 0), null, time, velocity);
+			}
 			
-			_position.x -= velocity.x;					//velocity.x is negative so to "add" it we need to substract it
-			velocity.x = -bounciness * velocity.x;
 			//_position.x = _oldPosition.x + t.x * velocity.x;
 			SetFadeColor(1, 0.2f, 0.2f);
 			if (wordy) {
@@ -128,8 +155,15 @@ public class Block : EasyDraw
 			//_position.x -= myGame.RightXBoundary - myGame.LeftXBoundary - 2 * radius;
 			//impactX = myGame.RightXBoundary - radius;
 			//t.x = (impactX - _oldPosition.x) / _position.x - _oldPosition.x;
-			_position.x -= velocity.x;
-			velocity.x = -bounciness * velocity.x;
+			//_position.x = myGame.RightXBoundary - radius;
+			impactX = myGame.RightXBoundary - radius;
+			time = (impactX - _oldPosition.x) / (_position.x - _oldPosition.x);
+
+			if (earliestCollision == null || earliestCollision.timeOfImpact > time)
+			{
+				earliestCollision = new CollisionInfo(new Vec2(-1, 0), null, time, velocity);
+			}
+
 			SetFadeColor(1, 0.2f, 0.2f);
 			if (wordy) {
 				Console.WriteLine ("Right boundary collision");
@@ -140,8 +174,15 @@ public class Block : EasyDraw
 			//_position.y += myGame.BottomYBoundary - myGame.TopYBoundary - 2 * radius;
 			//impactY = myGame.BottomYBoundary - radius;
 			//t.y = (impactY - _oldPosition.y) / _position.y - _oldPosition.y;
-			_position.y -= velocity.y;					//velocity.y is negative so to "add" it we need to substract it
-			velocity.y = -bounciness * velocity.y;
+			//_position.y = myGame.TopYBoundary + radius;
+
+			impactY = myGame.TopYBoundary + radius;
+			time = (impactY - _oldPosition.y) / (_position.y - _oldPosition.y);
+
+			if (earliestCollision == null || earliestCollision.timeOfImpact > time)
+			{
+				earliestCollision = new CollisionInfo(new Vec2(0, 1), null, time, velocity);
+			}
 			SetFadeColor(0.2f, 1, 0.2f);
 			if (wordy) {
 				Console.WriteLine ("Top boundary collision");
@@ -149,16 +190,24 @@ public class Block : EasyDraw
 		} else if (_position.y + radius > myGame.BottomYBoundary) {
 			// move block from bottom to top boundary:
 			//_position.y -= myGame.BottomYBoundary - myGame.TopYBoundary - 2 * radius;
+			//impactY = myGame.BottomYBoundary - radius;
+			//t.y = (impactY - _oldPosition.y) / _position.y - _oldPosition.y;
+
+
+			//_position.y = myGame.BottomYBoundary - radius;
+			
 			impactY = myGame.BottomYBoundary - radius;
-			t.y = (impactY - _oldPosition.y) / _position.y - _oldPosition.y;
+			time = (impactY - _oldPosition.y) / (_position.y - _oldPosition.y);
 
-
-			_position.y -= velocity.y;
 			//newVelocity.y = -velocity.y;
 			//poiY = _oldPosition.y + t.y * velocity.y;
 			//_position.y = poiY;
-			velocity.y = -bounciness * velocity.y;
-			
+
+			if (earliestCollision == null || earliestCollision.timeOfImpact > time)
+			{
+				earliestCollision = new CollisionInfo(new Vec2(0, -1), null, time, velocity); // only do this is earliestCol==null or if new time is better!
+			}
+
 			//_position.y = _oldPosition.y + t.y * velocity.y;
 			SetFadeColor(0.2f, 1, 0.2f);
 			if (wordy) {
@@ -166,7 +215,8 @@ public class Block : EasyDraw
 			}
 		}
 
-		velocity += acceleration;
+		
+
 		//_position = _oldPosition + new Vec2(t.x * velocity.x, t.y * velocity.y);
 		
 	}

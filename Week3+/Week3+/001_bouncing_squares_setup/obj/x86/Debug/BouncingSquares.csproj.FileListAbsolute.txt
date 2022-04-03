@@ -6,3 +6,11 @@ E:\studia\y1\physics_programming\Week3+\Week3+\001_bouncing_squares_setup\obj\x8
 E:\studia\y1\physics_programming\Week3+\Week3+\001_bouncing_squares_setup\obj\x86\Debug\BouncingSquares.csproj.CoreCompileInputs.cache
 E:\studia\y1\physics_programming\Week3+\Week3+\001_bouncing_squares_setup\obj\x86\Debug\BouncingSquares.exe
 E:\studia\y1\physics_programming\Week3+\Week3+\001_bouncing_squares_setup\obj\x86\Debug\BouncingSquares.pdb
+E:\physics_programming\Week3+\Week3+\001_bouncing_squares_setup\bin\Debug\BouncingSquares.exe.config
+E:\physics_programming\Week3+\Week3+\001_bouncing_squares_setup\bin\Debug\BouncingSquares.exe
+E:\physics_programming\Week3+\Week3+\001_bouncing_squares_setup\bin\Debug\BouncingSquares.pdb
+E:\physics_programming\Week3+\Week3+\001_bouncing_squares_setup\obj\x86\Debug\BouncingSquares.csproj.AssemblyReference.cache
+E:\physics_programming\Week3+\Week3+\001_bouncing_squares_setup\obj\x86\Debug\BouncingSquares.csproj.SuggestedBindingRedirects.cache
+E:\physics_programming\Week3+\Week3+\001_bouncing_squares_setup\obj\x86\Debug\BouncingSquares.csproj.CoreCompileInputs.cache
+E:\physics_programming\Week3+\Week3+\001_bouncing_squares_setup\obj\x86\Debug\BouncingSquares.exe
+E:\physics_programming\Week3+\Week3+\001_bouncing_squares_setup\obj\x86\Debug\BouncingSquares.pdb
