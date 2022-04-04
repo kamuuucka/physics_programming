@@ -9,6 +9,9 @@ internal class Platform : EasyDraw
 {
     public Vec2 position;
     public Vec2 direction = new Vec2(0, 0);
+    Shooting shooting;
+    public bool touched;
+    private float speed = 5;
 
     public Platform(int width, int height, Vec2 position) : base(width, height)
     {
@@ -17,8 +20,18 @@ internal class Platform : EasyDraw
         this.position = position;
        
         SetOrigin(this.width / 2, this.height / 2);
+        Console.WriteLine("WIDTH: " + this.width / 2 + " HEIGHT: " + this.height / 2);
         DrawPlatform();
+
+        shooting = new Shooting(new Vec2(-width / 4, -height / 2 +30), this);
+        AddChild(shooting);
         UpdateScreenPosition();
+        
+    }
+
+    public void SetTouched(bool state)
+    {
+        touched = state;
     }
 
     private void DrawPlatform()
@@ -31,7 +44,27 @@ internal class Platform : EasyDraw
 
     void FollowMouse()
     {
-        position.SetXY(Input.mouseX, y);
+        if (!touched)
+        {
+            position.SetXY(Input.mouseX, y);
+        }
+        
+    }
+
+    void Move()
+    {
+        if (!touched)
+        {
+            if (Input.GetKey(Key.A))
+            {
+                position.x -= speed;
+            }
+            else if (Input.GetKey(Key.D))
+            {
+                position.x += speed;
+            }
+        }
+       
     }
 
     public void UpdateScreenPosition()
@@ -48,11 +81,15 @@ internal class Platform : EasyDraw
 
         x = position.x;
         y = position.y;
+
+        direction = shooting.direction;
+        
     }
 
     public void Step()
     {
-        FollowMouse();
+        // FollowMouse();
+        Move();
         UpdateScreenPosition();
     }
 }

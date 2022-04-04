@@ -9,13 +9,15 @@ using GXPEngine;
 internal class Ball : EasyDraw
 {
     public int radius;
-    float speed;
+    float speed = 2;
 
     public Vec2 position;
     private Vec2 oldPosition;
     private Vec2 velocity;
     private CollisionInfo earliestCollision;
     private Platform platform;
+
+    public bool platformTouched = false;
 
     public static float bounciness = 0.98f;
 
@@ -27,7 +29,7 @@ internal class Ball : EasyDraw
         this.platform = platform;
 
         oldPosition = new Vec2(0,0);
-        velocity = new Vec2(-1,-0.8f);
+        velocity = new Vec2(-speed,speed/2);
 
         SetOrigin(radius, radius);
 
@@ -48,8 +50,12 @@ internal class Ball : EasyDraw
 
     public void UpdateScreenPosition()
     {
+        if (platformTouched)
+        {
+            position.x = platform.position.x - platform.width/4;
+        }
         x = position.x;
-        y = position.y;
+        y = position.y; 
     }
 
     public void Step()
@@ -58,6 +64,7 @@ internal class Ball : EasyDraw
         //FollowMouse();
         Move();
         UpdateScreenPosition();
+        platform.SetTouched(platformTouched);
     }
 
     private void Move()
@@ -72,6 +79,9 @@ internal class Ball : EasyDraw
         {
             ResolveCollision(earliestCollision);
         }
+
+
+        Shooting();
     }
     void ResolveCollision(CollisionInfo collision)
     {
@@ -90,11 +100,11 @@ internal class Ball : EasyDraw
 
     private void PlatformCollision()
     {
-        Console.WriteLine("Platform position: {0}     Ball position: {1}", platform.position.ToString(), position.ToString());
-        //  
+        //Console.WriteLine("Platform position: {0}     Ball position: {1}", platform.position.ToString(), position.ToString());
         if ((position.y + radius > platform.position.y - platform.height/2)
             && (position.x > platform.position.x - platform.width / 2)
-            && (position.x < platform.position.x + platform.width /2))
+            && (position.x < platform.position.x + platform.width /2)
+            && !platformTouched)
         {
             SetColor(1, 0, 0);
 
@@ -106,7 +116,9 @@ internal class Ball : EasyDraw
 
 
             position -= platformLine.Normal() * (platformDistance - radius);
-            velocity.Reflect(platformLine.Normal());
+            //velocity.Reflect(platformLine.Normal());
+            velocity = new Vec2(0, 0);
+            platformTouched = true;
         }
     }
 
@@ -133,11 +145,11 @@ internal class Ball : EasyDraw
             position += line.Normal() * (ballDistance - radius);
             velocity.Reflect(line.Normal());
         }
-        else if (ballDistanceLeft < radius)
+        if (ballDistanceLeft < radius)
         {
             SetColor(1, 0, 1);
-            position += line.Normal() * (ballDistanceLeft + radius);
-            velocity.Reflect(line.Normal());
+            position += line.Normal() * (ballDistanceLeft - radius);
+            velocity.Reflect(lineLeft.Normal());
         }
 
         if (position.x - radius < myGame.leftXBoundary.GetX())
@@ -181,6 +193,15 @@ internal class Ball : EasyDraw
         
 
         
+    }
+
+    private void Shooting()
+    {
+        if (Input.GetKey(Key.SPACE))
+        {
+            velocity = speed * platform.direction;
+            platformTouched = false;
+        }
     }
 }
 

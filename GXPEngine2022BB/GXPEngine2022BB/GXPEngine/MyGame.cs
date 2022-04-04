@@ -29,11 +29,15 @@ public class MyGame : Game
 		diagonalRightBoundary = new Line(new Vec2(width - border - 100, border), new Vec2(width - border, border + 100));
 		AddChild(diagonalRightBoundary);
 
-		platform = new Platform(200, 10, new Vec2 (width / 2, height - border*2));
+		platform = new Platform(200, 10, new Vec2(width / 2, height - border));
 		AddChild(platform);
 
-		ball = new Ball(30, new Vec2(width/2, height/2), platform);
+		ball = new Ball(10, new Vec2(width/2, height/2), platform);
 		AddChild(ball);
+
+		
+
+
 
 	}
 

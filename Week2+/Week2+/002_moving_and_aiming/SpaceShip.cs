@@ -46,7 +46,8 @@ class SpaceShip : Sprite
 		Console.WriteLine(_position.y);
 		if (!(Input.GetKey(Key.LEFT_SHIFT) || Input.GetKey(Key.RIGHT_SHIFT))) 
 		{ // Shift not pressed: Directly aim at mouse
-			rotation = targetAngle;
+			//rotation = targetAngle;
+			_position = _position * targetAngle;
 			
 		} else 
 		{ // Shift pressed: Ease towards mouse position - but not in a good way! (Solve this for assignment 2)
