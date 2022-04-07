@@ -23,7 +23,7 @@ internal class Platform : EasyDraw
         Console.WriteLine("WIDTH: " + this.width / 2 + " HEIGHT: " + this.height / 2);
         DrawPlatform();
 
-        shooting = new Shooting(new Vec2(-width / 4, -height / 2 +30), this);
+        shooting = new Shooting(new Vec2(x, y), this);
         AddChild(shooting);
         UpdateScreenPosition();
         
@@ -36,8 +36,10 @@ internal class Platform : EasyDraw
 
     private void DrawPlatform()
     {
+        Clear(50);
         Fill(255, 255, 0);
         Stroke(0, 0, 0);
+        ShapeAlign(CenterMode.Min, CenterMode.Min);
         Rect(0, 0, width, height);
 
     }

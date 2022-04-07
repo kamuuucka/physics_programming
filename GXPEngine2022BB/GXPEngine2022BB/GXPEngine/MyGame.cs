@@ -1,6 +1,7 @@
 using System;									// System contains a lot of default C# libraries 
 using GXPEngine;                                // GXPEngine contains the engine
-using System.Drawing;							// System.Drawing contains drawing tools such as Color definitions
+using System.Drawing;                           // System.Drawing contains drawing tools such as Color definitions
+using System.Collections.Generic;
 
 public class MyGame : Game
 {
@@ -16,32 +17,42 @@ public class MyGame : Game
 	public Line topYBoundary;
 	public Line diagonalLeftBoundary;
 	public Line diagonalRightBoundary;
+	public List<Line> lines;
 
 	public MyGame() : base(800, 600, false)		// Create a window that's 800x600 and NOT fullscreen
 	{
 
 		//placement = new BrickPlacement(new Vec2(border + border, border + border), new Vec2(width, height), this.width, this.height);
 
-		leftXBoundary = new Line(new Vec2(border, border+100), new Vec2(border, height - border));
-		AddChild(leftXBoundary);
+		lines = new List<Line>();
+
+		//Straigh borders
+		leftXBoundary = new Line(new Vec2(border, height - border), new Vec2(border, border + 100));
+		lines.Add(leftXBoundary);
 		rightXBoundary = new Line(new Vec2(width-border, border+100), new Vec2(width-border, height-border));
-		AddChild(rightXBoundary);
+		lines.Add(rightXBoundary);
 		topYBoundary = new Line(new Vec2(border+100,border), new Vec2(width-border- 100, border));
-		AddChild(topYBoundary);
-
+		lines.Add(topYBoundary);
+		//Diagonal borders
 		diagonalLeftBoundary = new Line(new Vec2(border,border+100), new Vec2(border+100, border));
-		AddChild(diagonalLeftBoundary);
+		lines.Add(diagonalLeftBoundary);
 		diagonalRightBoundary = new Line(new Vec2(width - border - 100, border), new Vec2(width - border, border + 100));
-		AddChild(diagonalRightBoundary);
+		lines.Add(diagonalRightBoundary);
 
-		platform = new Platform(200, 10, new Vec2(width / 2, height - border));
+		foreach (Line line in lines)
+        {
+			AddChild(line);
+        }
+
+
+		platform = new Platform(100, 10, new Vec2(width / 2, height - border));
 		AddChild(platform);
 
 		ball = new Ball(10, new Vec2(width/2, height/2), platform);
 		AddChild(ball);
 
 		brick = new Brick(800, 50, new Vec2(100, 100));
-		AddChild(brick);
+		//AddChild(brick);
 
 		
 		//AddChild(placement);

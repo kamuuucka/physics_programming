@@ -23,8 +23,11 @@ internal class Brick : EasyDraw
 
     void Draw()
     {
+        Clear(50);
         Fill(23, 189, 200);
         Stroke(0, 0, 0);
+        ShapeAlign(CenterMode.Min, CenterMode.Min);
+
         Rect(0, 0, width,height);
     }
 }

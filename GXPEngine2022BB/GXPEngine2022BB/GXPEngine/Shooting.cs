@@ -37,8 +37,8 @@ internal class Shooting : EasyDraw
             Console.WriteLine(rotation);
         }
 
-       if (rotation < -170) rotation = -170;
-       if (rotation > -10) rotation = -10;
+       if (rotation < -160) rotation = -160;
+       if (rotation > -20) rotation = -20;
 
         direction = Vec2.GetUnitVectorDeg(rotation);
     }
