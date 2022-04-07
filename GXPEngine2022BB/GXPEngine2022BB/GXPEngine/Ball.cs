@@ -14,6 +14,7 @@ internal class Ball : EasyDraw
     public Vec2 position;
     private Vec2 oldPosition;
     private Vec2 velocity;
+    private Vec2 oldVelocity;
     private CollisionInfo earliestCollision;
     private Platform platform;
 
@@ -52,7 +53,9 @@ internal class Ball : EasyDraw
     {
         if (platformTouched)
         {
-            position.x = platform.position.x - platform.width/4;
+            oldVelocity = velocity;
+            //position.x = platform.position.x - platform.width/4;
+            velocity = new Vec2(0, 0);
         }
         x = position.x;
         y = position.y; 
@@ -199,6 +202,7 @@ internal class Ball : EasyDraw
     {
         if (Input.GetKey(Key.SPACE))
         {
+            velocity = oldVelocity;
             velocity = speed * platform.direction;
             platformTouched = false;
         }

@@ -10,7 +10,7 @@ internal class Shooting : EasyDraw
     Vec2 position;
     public Vec2 direction;
 
-    public Shooting(Vec2 position, Platform plat) : base("arrow_long.png")
+    public Shooting(Vec2 position, Platform plat) : base("arrow_long2.png")
     {
         this.position = position;
         SetOrigin(position.x,height/2);

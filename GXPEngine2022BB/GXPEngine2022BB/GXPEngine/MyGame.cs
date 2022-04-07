@@ -9,6 +9,8 @@ public class MyGame : Game
 
 	Ball ball;
 	Platform platform;
+	Brick brick;
+	BrickPlacement placement;
 	public Line leftXBoundary;
 	public Line rightXBoundary;
 	public Line topYBoundary;
@@ -17,6 +19,9 @@ public class MyGame : Game
 
 	public MyGame() : base(800, 600, false)		// Create a window that's 800x600 and NOT fullscreen
 	{
+
+		//placement = new BrickPlacement(new Vec2(border + border, border + border), new Vec2(width, height), this.width, this.height);
+
 		leftXBoundary = new Line(new Vec2(border, border+100), new Vec2(border, height - border));
 		AddChild(leftXBoundary);
 		rightXBoundary = new Line(new Vec2(width-border, border+100), new Vec2(width-border, height-border));
@@ -35,7 +40,11 @@ public class MyGame : Game
 		ball = new Ball(10, new Vec2(width/2, height/2), platform);
 		AddChild(ball);
 
+		brick = new Brick(800, 50, new Vec2(100, 100));
+		AddChild(brick);
+
 		
+		//AddChild(placement);
 
 
 
