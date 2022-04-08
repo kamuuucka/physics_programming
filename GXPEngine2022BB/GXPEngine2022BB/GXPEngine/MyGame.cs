@@ -11,13 +11,13 @@ public class MyGame : Game
 	Ball ball;
 	Platform platform;
 	Brick brick;
-	BrickPlacement placement;
 	public Line leftXBoundary;
 	public Line rightXBoundary;
 	public Line topYBoundary;
 	public Line diagonalLeftBoundary;
 	public Line diagonalRightBoundary;
 	public List<Line> lines;
+	public List<Brick> bricks;
 
 	public MyGame() : base(800, 600, false)		// Create a window that's 800x600 and NOT fullscreen
 	{
@@ -25,6 +25,7 @@ public class MyGame : Game
 		//placement = new BrickPlacement(new Vec2(border + border, border + border), new Vec2(width, height), this.width, this.height);
 
 		lines = new List<Line>();
+		bricks = new List<Brick>();
 
 		//Straigh borders
 		leftXBoundary = new Line(new Vec2(border, height - border), new Vec2(border, border + 100));
@@ -51,14 +52,15 @@ public class MyGame : Game
 		ball = new Ball(10, new Vec2(width/2, height/2), platform);
 		AddChild(ball);
 
-		brick = new Brick(800, 50, new Vec2(100, 100));
-		//AddChild(brick);
-
-		
-		//AddChild(placement);
-
-
-
+		for (int i = 165; i < 600; i+=60)
+        {
+			for (int j = 100; j <300; j += 30)
+            {
+				brick = new Brick(50, 20, new Vec2(i, j), ball);
+				bricks.Add(brick);
+				AddChild(brick);
+			}
+		}
 	}
 
 	// For every game object, Update is called every frame, by the engine:

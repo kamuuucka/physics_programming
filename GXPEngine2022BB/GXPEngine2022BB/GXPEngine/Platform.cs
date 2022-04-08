@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using GXPEngine;
 
-internal class Platform : EasyDraw
+public class Platform : EasyDraw
 {
     public Vec2 position;
     public Vec2 direction = new Vec2(0, 0);

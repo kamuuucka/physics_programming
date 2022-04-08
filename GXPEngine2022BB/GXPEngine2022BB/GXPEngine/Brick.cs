@@ -6,15 +6,18 @@ using System.Threading.Tasks;
 using GXPEngine;
 
 
-internal class Brick : EasyDraw
+public class Brick : EasyDraw
 {
-    Vec2 position;
+    public Vec2 position;
+    Ball ball;
+    public bool brickColided = false;
 
-    public Brick(int width, int height, Vec2 position) : base(width, height)
+    public Brick(int width, int height, Vec2 position, Ball ball) : base(width, height)
     {
         this.width = width;
         this.height = height;
         this.position = position;
+        this.ball = ball;
 
         Draw();
         x = position.x;
@@ -29,6 +32,14 @@ internal class Brick : EasyDraw
         ShapeAlign(CenterMode.Min, CenterMode.Min);
 
         Rect(0, 0, width,height);
+    }
+
+    void Update()
+    {
+        if (brickColided)
+        {
+            this.Destroy();
+        }
     }
 }
 
